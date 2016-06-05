@@ -62,7 +62,7 @@ class Pagination implements InterfacePagination
      */
     public function setCurrentPageNumber($pageNumber)
     {
-        $this->currentPageNumber = $pageNumber;
+        $this->currentPageNumber = $pageNumber == 0 ? 1 : $pageNumber;
         return $this;
     }
 
@@ -93,18 +93,18 @@ class Pagination implements InterfacePagination
     {
         ?><nav><?
             ?><ul><?
-                ?><li><?
+                ?><li<? if ($this->currentPageNumber == 1) { ?> class="disabled"<? } ?>><?
                     ?><a href="#" aria-label="Previous"><?
                         ?><span aria-hidden="true">&laquo;</span><?
                     ?></a><?
                 ?></li><?
                 $numberOfPages = $this->getNumberOfPages();
                 for ($i = 1; $i < $numberOfPages + 1; $i++) {
-                    ?><li><?
+                    ?><li<? if ($this->currentPageNumber == $i) { ?> class="active"<? } ?>><?
                         ?><a href="?page=<?= $i ?>&on_page=<?= $this->countOnPage ?>"><?= $i ?></a><?
                     ?></li><?
                 }
-                ?><li><?
+                ?><li<? if ($this->currentPageNumber == $numberOfPages) { ?> class="disabled"<? } ?>><?
                     ?><a href="#" aria-label="Next"><?
                         ?><span aria-hidden="true">&raquo;</span><?
                     ?></a><?
