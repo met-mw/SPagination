@@ -118,7 +118,7 @@ class Pagination implements InterfacePagination
                     ?></a><?
                 ?></li><?
                 $numberOfPages = $this->getNumberOfPages();
-                for ($i = 1; $i < $numberOfPages + 1; $i++) {
+                for ($i = 1; $i <= $numberOfPages; $i++) {
                     ?><li<? if ($this->currentPageNumber == $i) { ?> class="active"<? } ?>><?
                         ?><a href="?page=<?= $i ?>&on_page=<?= $this->countOnPage ?>"><?= $i ?></a><?
                     ?></li><?
