@@ -132,8 +132,8 @@ class Pagination implements InterfacePagination
                 $previousAndCurrentDiff = $this->currentPageNumber - $this->displayedPreviousCount;
                 $nextAndCurrentDiff = $this->currentPageNumber + $this->displayedNextCount;
 
-                $needPreviousEllipsis = $previousAndCurrentDiff < 2;
-                $needNextEllipsis = $nextAndCurrentDiff >= $numberOfPages;
+                $needPreviousEllipsis = $previousAndCurrentDiff >= 2;
+                $needNextEllipsis = $nextAndCurrentDiff <= $numberOfPages - 1;
 
                 if ($needPreviousEllipsis) {
                     ?><li>...</li><?
