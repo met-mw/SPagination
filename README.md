@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/met-mw/SPagination.svg?branch=master)](https://travis-ci.org/met-mw/SPagination)
 # SPagination
 Простой механизм постраничной навигации
 
