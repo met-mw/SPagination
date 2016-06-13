@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use SPagination\Interfaces\InterfacePagination;
 
 class Pagination implements InterfacePagination
+
 {
     /** @var int */
     protected $count;
@@ -114,18 +115,18 @@ class Pagination implements InterfacePagination
 
     public function render()
     {
-        ?><nav><?
-            ?><ul><?
-                ?><li<? if ($this->currentPageNumber == 1) { ?> class="disabled"<? } ?>><?
-                    ?><a href="?page=1" aria-label="First"><?
-                        ?><span aria-hidden="true">&laquo;&laquo;</span><?
-                    ?></a><?
-                ?></li><?
-                ?><li<? if ($this->currentPageNumber == 1) { ?> class="disabled"<? } ?>><?
-                    ?><a href="#" aria-label="Previous"><?
-                        ?><span aria-hidden="true">&laquo;</span><?
-                    ?></a><?
-                ?></li><?
+        ?><nav><?php
+            ?><ul><?php
+                ?><li<?php if ($this->currentPageNumber == 1) { ?> class="disabled"<?php } ?>><?php
+                    ?><a href="?page=1" aria-label="First"><?php
+                        ?><span aria-hidden="true">&laquo;&laquo;</span><?php
+                    ?></a><?php
+                ?></li><?php
+                ?><li<?php if ($this->currentPageNumber == 1) { ?> class="disabled"<?php } ?>><?php
+                    ?><a href="#" aria-label="Previous"><?php
+                        ?><span aria-hidden="true">&laquo;</span><?php
+                    ?></a><?php
+                ?></li><?php
 
                 $numberOfPages = $this->getNumberOfPages();
                 $previousAndCurrentDiff = $this->currentPageNumber - $this->displayedPreviousCount;
@@ -135,45 +136,45 @@ class Pagination implements InterfacePagination
                 $needNextEllipsis = $nextAndCurrentDiff <= $numberOfPages - 1;
 
                 if ($needPreviousEllipsis) {
-                    ?><li>...</li><?
+                    ?><li>...</li><?php
                 }
 
                 for ($i = 1; $i <= $numberOfPages; $i++) {
                     if ($i < $this->currentPageNumber) {
                         if ($i >= $previousAndCurrentDiff) {
-                            ?><li><?
-                                ?><a href="?page=<?= $i ?>&on_page=<?= $this->countOnPage ?>"><?= $i ?></a><?
-                            ?></li><?
+                            ?><li><?php
+                                ?><a href="?page=<?php echo $i; ?>&on_page=<?php echo $this->countOnPage; ?>"><?php echo $i; ?></a><?php
+                            ?></li><?php
                         }
                     } elseif ($i > $this->currentPageNumber) {
                         if ($i <= $nextAndCurrentDiff) {
-                            ?><li><?
-                                ?><a href="?page=<?= $i ?>&on_page=<?= $this->countOnPage ?>"><?= $i ?></a><?
-                            ?></li><?
+                            ?><li><?php
+                                ?><a href="?page=<?php echo $i; ?>&on_page=<?php echo $this->countOnPage; ?>"><?php echo $i; ?></a><?php
+                            ?></li><?php
                         }
                     } else {
-                        ?><li class="active"><?
-                            ?><a href="?page=<?= $i ?>&on_page=<?= $this->countOnPage ?>"><?= $i ?></a><?
-                        ?></li><?
+                        ?><li class="active"><?php
+                            ?><a href="?page=<?php echo $i; ?>&on_page=<?php echo $this->countOnPage; ?>"><?php echo $i; ?></a><?php
+                        ?></li><?php
                     }
                 }
 
                 if ($needNextEllipsis) {
-                    ?><li>...</li><?
+                    ?><li>...</li><?php
                 }
 
-                ?><li<? if ($this->currentPageNumber == $numberOfPages) { ?> class="disabled"<? } ?>><?
-                    ?><a href="#" aria-label="Next"><?
-                        ?><span aria-hidden="true">&raquo;</span><?
-                    ?></a><?
-                ?></li><?
-                ?><li<? if ($this->currentPageNumber == $numberOfPages) { ?> class="disabled"<? } ?>><?
-                    ?><a href="?page=<?= $numberOfPages ?>" aria-label="Last"><?
-                        ?><span aria-hidden="true">&raquo;&raquo;</span><?
-                    ?></a><?
-                ?></li><?
-            ?></ul><?
-        ?></nav><?
+                ?><li<?php if ($this->currentPageNumber == $numberOfPages) { ?> class="disabled"<?php } ?>><?php
+                    ?><a href="#" aria-label="Next"><?php
+                        ?><span aria-hidden="true">&raquo;</span><?php
+                    ?></a><?php
+                ?></li><?php
+                ?><li<?php if ($this->currentPageNumber == $numberOfPages) { ?> class="disabled"<?php } ?>><?php
+                    ?><a href="?page=<?php echo $numberOfPages; ?>" aria-label="Last"><?php
+                        ?><span aria-hidden="true">&raquo;&raquo;</span><?php
+                    ?></a><?php
+                ?></li><?php
+            ?></ul><?php
+        ?></nav><?php
     }
 
     /**
@@ -223,4 +224,5 @@ class Pagination implements InterfacePagination
         $this->displayedNextCount = $nextCount;
         return $this;
     }
+
 }
