@@ -2,6 +2,7 @@
 namespace SPagination\Classes;
 
 
+use InvalidArgumentException;
 use SPagination\Interfaces\InterfacePagination;
 
 class Pagination implements InterfacePagination
@@ -10,7 +11,7 @@ class Pagination implements InterfacePagination
     /** @var int */
     protected $count;
     /** @var int */
-    protected $currentPageNumber;
+    protected $currentPageNumber = 1;
     /** @var int */
     protected $countOnPage;
     protected $pageNumberParamName;
@@ -28,7 +29,7 @@ class Pagination implements InterfacePagination
      */
     public function getLimit()
     {
-        return (int)$this->countOnPage;
+        return $this->countOnPage;
     }
 
     /**
@@ -36,7 +37,7 @@ class Pagination implements InterfacePagination
      */
     public function getOffset()
     {
-        return (int)$this->countOnPage * ((int)$this->currentPageNumber == 0 ? (int)$this->currentPageNumber : (int)$this->currentPageNumber - 1);
+        return $this->countOnPage * ($this->displayedLinksCount - 1);
     }
 
     /**
@@ -44,7 +45,7 @@ class Pagination implements InterfacePagination
      */
     public function getNumberOfPages()
     {
-        return ceil($this->count / $this->countOnPage);
+        return (int)ceil($this->count / $this->countOnPage);
     }
 
     /**
@@ -53,6 +54,10 @@ class Pagination implements InterfacePagination
      */
     public function setCount($count)
     {
+        if (!is_integer($count)) {
+            throw new InvalidArgumentException('Количество элементов должно быть целым числом.');
+        }
+
         $this->count = $count;
         return $this;
     }
@@ -61,8 +66,12 @@ class Pagination implements InterfacePagination
      * @param int $pageNumber
      * @return InterfacePagination
      */
-    public function setCurrentPageNumber($pageNumber)
+    public function setCurrentPageNumber($pageNumber = 1)
     {
+        if (!is_integer($pageNumber)) {
+            throw new InvalidArgumentException('Номер текущий страницы должен быть целым числом.');
+        }
+
         $this->currentPageNumber = $pageNumber == 0 ? 1 : $pageNumber;
         return $this;
     }
@@ -73,6 +82,10 @@ class Pagination implements InterfacePagination
      */
     public function setCountOnPage($countOnPage)
     {
+        if (!is_integer($countOnPage)) {
+            throw new InvalidArgumentException('Количество элементов на странице должно быть целым числом.');
+        }
+
         $this->countOnPage = $countOnPage;
         return $this;
     }
@@ -130,6 +143,10 @@ class Pagination implements InterfacePagination
      */
     public function setPageNumberParamName($pageNumberParamName = 'page')
     {
+        if (!is_string($pageNumberParamName)) {
+            throw new InvalidArgumentException('Имя параметра номера страницы должно быть строкой.');
+        }
+
         $this->pageNumberParamName = $pageNumberParamName;
         return $this;
     }
@@ -140,6 +157,10 @@ class Pagination implements InterfacePagination
      */
     public function setCountOnPageParamName($countOnPageParamName = 'on_page')
     {
+        if (!is_string($countOnPageParamName)) {
+            throw new InvalidArgumentException('Имя параметра количества элементов на странице должно быть строкой.');
+        }
+
         $this->countOnPageParamName = $countOnPageParamName;
         return $this;
     }
@@ -150,6 +171,10 @@ class Pagination implements InterfacePagination
      */
     public function setDisplayedLinksCount($displayedLinksCount)
     {
+        if (!is_integer($displayedLinksCount)) {
+            throw new InvalidArgumentException('Количество отображаемых ссылок на страницы должно быть целым числом.');
+        }
+
         $this->displayedLinksCount = $displayedLinksCount;
         return $this;
     }
