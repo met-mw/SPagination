@@ -117,12 +117,12 @@ class Pagination implements InterfacePagination
     {
         ?><ul><?php
             ?><li<?php if ($this->currentPageNumber == 1) { ?> class="disabled"<?php } ?>><?php
-                ?><a href="?page=1&amp;on_page=<?php echo $this->countOnPage; ?>" aria-label="First"><?php
+                ?><a href="?<?php echo $this->pageNumberParamName; ?>=1&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>" aria-label="First"><?php
                     ?><span aria-hidden="true">&laquo;&laquo;</span><?php
                 ?></a><?php
             ?></li><?php
             ?><li<?php if ($this->currentPageNumber == 1) { ?> class="disabled"<?php } ?>><?php
-                ?><a href="?page=<?php echo ($this->currentPageNumber == 1 ? 1 : $this->currentPageNumber - 1); ?>&amp;on_page=<?php echo $this->countOnPage; ?>" aria-label="Previous"><?php
+                ?><a href="?<?php echo $this->pageNumberParamName; ?>=<?php echo ($this->currentPageNumber == 1 ? 1 : $this->currentPageNumber - 1); ?>&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>" aria-label="Previous"><?php
                     ?><span aria-hidden="true">&laquo;</span><?php
                 ?></a><?php
             ?></li><?php
@@ -142,18 +142,18 @@ class Pagination implements InterfacePagination
                 if ($i < $this->currentPageNumber) {
                     if ($i >= $previousAndCurrentDiff) {
                         ?><li><?php
-                            ?><a href="?page=<?php echo $i; ?>&amp;on_page=<?php echo $this->countOnPage; ?>"><?php echo $i; ?></a><?php
+                            ?><a href="?<?php echo $this->pageNumberParamName; ?>=<?php echo $i; ?>&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>"><?php echo $i; ?></a><?php
                         ?></li><?php
                     }
                 } elseif ($i > $this->currentPageNumber) {
                     if ($i <= $nextAndCurrentDiff) {
                         ?><li><?php
-                            ?><a href="?page=<?php echo $i; ?>&amp;on_page=<?php echo $this->countOnPage; ?>"><?php echo $i; ?></a><?php
+                            ?><a href="?<?php echo $this->pageNumberParamName; ?>=<?php echo $i; ?>&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>"><?php echo $i; ?></a><?php
                         ?></li><?php
                     }
                 } else {
                     ?><li class="active"><?php
-                        ?><a href="?page=<?php echo $i; ?>&amp;on_page=<?php echo $this->countOnPage; ?>"><?php echo $i; ?></a><?php
+                        ?><a href="?<?php echo $this->pageNumberParamName; ?>=<?php echo $i; ?>&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>"><?php echo $i; ?></a><?php
                     ?></li><?php
                 }
             }
@@ -163,12 +163,12 @@ class Pagination implements InterfacePagination
             }
 
             ?><li<?php if ($this->currentPageNumber == $numberOfPages) { ?> class="disabled"<?php } ?>><?php
-                ?><a href="?page=<?php echo ($this->currentPageNumber == $numberOfPages ? $numberOfPages : $this->currentPageNumber + 1); ?>&amp;on_page=<?php echo $this->countOnPage; ?>" aria-label="Next"><?php
+                ?><a href="?<?php echo $this->pageNumberParamName; ?>=<?php echo ($this->currentPageNumber == $numberOfPages ? $numberOfPages : $this->currentPageNumber + 1); ?>&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>" aria-label="Next"><?php
                     ?><span aria-hidden="true">&raquo;</span><?php
                 ?></a><?php
             ?></li><?php
             ?><li<?php if ($this->currentPageNumber == $numberOfPages) { ?> class="disabled"<?php } ?>><?php
-                ?><a href="?page=<?php echo $numberOfPages; ?>&amp;on_page=<?php echo $this->countOnPage; ?>" aria-label="Last"><?php
+                ?><a href="?<?php echo $this->pageNumberParamName; ?>=<?php echo $numberOfPages; ?>&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>" aria-label="Last"><?php
                     ?><span aria-hidden="true">&raquo;&raquo;</span><?php
                 ?></a><?php
             ?></li><?php
