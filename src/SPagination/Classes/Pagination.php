@@ -115,7 +115,7 @@ class Pagination implements InterfacePagination
 
     public function render()
     {
-        ?><ul><?php
+        ?><ul class="pagination"><?php
             ?><li<?php if ($this->currentPageNumber == 1) { ?> class="disabled"<?php } ?>><?php
                 ?><a href="?<?php echo $this->pageNumberParamName; ?>=1&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>" aria-label="First"><?php
                     ?><span aria-hidden="true">&laquo;&laquo;</span><?php
