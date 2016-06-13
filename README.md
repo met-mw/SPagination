@@ -1,4 +1,8 @@
 [![Build Status](https://travis-ci.org/met-mw/SPagination.svg?branch=master)](https://travis-ci.org/met-mw/SPagination)
+[![Latest Stable Version](https://poser.pugx.org/met_mw/spagination/v/stable)](https://packagist.org/packages/met_mw/spagination)
+[![Total Downloads](https://poser.pugx.org/met_mw/spagination/downloads)](https://packagist.org/packages/met_mw/spagination)
+[![Latest Unstable Version](https://poser.pugx.org/met_mw/spagination/v/unstable)](https://packagist.org/packages/met_mw/spagination)
+[![License](https://poser.pugx.org/met_mw/spagination/license)](https://packagist.org/packages/met_mw/spagination)
 # SPagination
 Простой механизм постраничной навигации
 
