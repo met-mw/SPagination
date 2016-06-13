@@ -13,14 +13,24 @@ class Pagination implements InterfacePagination
     /** @var int */
     protected $currentPageNumber = 1;
     /** @var int */
-    protected $countOnPage;
-    protected $pageNumberParamName;
-    protected $countOnPageParamName;
-    protected $displayedLinksCount = 5;
+    protected $countOnPage = 10;
+    protected $pageNumberParamName = 'page';
+    protected $countOnPageParamName = 'on_page';
 
-    public function __construct($pageNumberParamName = 'page', $countOnPageParamName = 'on_page')
+    protected $displayedPreviousCount = 5;
+    protected $displayedNextCount = 5;
+
+    /**
+     * Pagination constructor.
+     * @param int $displayedPreviousCount
+     * @param int $displayedNextCount
+     * @param string $pageNumberParamName
+     * @param string $countOnPageParamName
+     */
+    public function __construct($displayedPreviousCount = 5, $displayedNextCount = 5, $pageNumberParamName = 'page', $countOnPageParamName = 'on_page')
     {
-        $this->setPageNumberParamName($pageNumberParamName)
+        $this->setDisplayedLinksRange($displayedPreviousCount, $displayedNextCount)
+            ->setPageNumberParamName($pageNumberParamName)
             ->setCountOnPageParamName($countOnPageParamName);
     }
 
@@ -37,7 +47,7 @@ class Pagination implements InterfacePagination
      */
     public function getOffset()
     {
-        return $this->countOnPage * ($this->displayedLinksCount - 1);
+        return $this->countOnPage * ($this->currentPageNumber - 1);
     }
 
     /**
@@ -117,12 +127,42 @@ class Pagination implements InterfacePagination
                         ?><span aria-hidden="true">&laquo;</span><?
                     ?></a><?
                 ?></li><?
+
                 $numberOfPages = $this->getNumberOfPages();
-                for ($i = 1; $i <= $numberOfPages; $i++) {
-                    ?><li<? if ($this->currentPageNumber == $i) { ?> class="active"<? } ?>><?
-                        ?><a href="?page=<?= $i ?>&on_page=<?= $this->countOnPage ?>"><?= $i ?></a><?
-                    ?></li><?
+                $previousAndCurrentDiff = $this->currentPageNumber - $this->displayedPreviousCount;
+                $nextAndCurrentDiff = $this->currentPageNumber + $this->displayedNextCount;
+
+                $needPreviousEllipsis = $previousAndCurrentDiff < 2;
+                $needNextEllipsis = $nextAndCurrentDiff >= $numberOfPages;
+
+                if ($needPreviousEllipsis) {
+                    ?><li>...</li><?
                 }
+
+                for ($i = 1; $i <= $numberOfPages; $i++) {
+                    if ($i < $this->currentPageNumber) {
+                        if ($i >= $previousAndCurrentDiff) {
+                            ?><li><?
+                                ?><a href="?page=<?= $i ?>&on_page=<?= $this->countOnPage ?>"><?= $i ?></a><?
+                            ?></li><?
+                        }
+                    } elseif ($i > $this->currentPageNumber) {
+                        if ($i <= $nextAndCurrentDiff) {
+                            ?><li><?
+                                ?><a href="?page=<?= $i ?>&on_page=<?= $this->countOnPage ?>"><?= $i ?></a><?
+                            ?></li><?
+                        }
+                    } else {
+                        ?><li class="active"><?
+                            ?><a href="?page=<?= $i ?>&on_page=<?= $this->countOnPage ?>"><?= $i ?></a><?
+                        ?></li><?
+                    }
+                }
+
+                if ($needNextEllipsis) {
+                    ?><li>...</li><?
+                }
+
                 ?><li<? if ($this->currentPageNumber == $numberOfPages) { ?> class="disabled"<? } ?>><?
                     ?><a href="#" aria-label="Next"><?
                         ?><span aria-hidden="true">&raquo;</span><?
@@ -166,16 +206,22 @@ class Pagination implements InterfacePagination
     }
 
     /**
-     * @param int $displayedLinksCount
+     * @param int $previousCount
+     * @param int $nextCount
      * @return InterfacePagination
      */
-    public function setDisplayedLinksCount($displayedLinksCount)
+    public function setDisplayedLinksRange($previousCount, $nextCount)
     {
-        if (!is_integer($displayedLinksCount)) {
-            throw new InvalidArgumentException('Количество отображаемых ссылок на страницы должно быть целым числом.');
+        if (!is_integer($previousCount)) {
+            throw new InvalidArgumentException('Количество отображаемых ссылок на предыдущие страницы должно быть целым числом.');
         }
 
-        $this->displayedLinksCount = $displayedLinksCount;
+        if (!is_integer($nextCount)) {
+            throw new InvalidArgumentException('Количество отображаемых ссылок на следующие страницы должно быть целым числом.');
+        }
+
+        $this->displayedPreviousCount = $previousCount;
+        $this->displayedNextCount = $nextCount;
         return $this;
     }
 

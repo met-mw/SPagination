@@ -51,10 +51,11 @@ interface InterfacePagination
     public function setCountOnPageParamName($countOnPageParamName = 'on_page');
 
     /**
-     * @param int $displayedLinksCount
+     * @param int $previousCount
+     * @param int $nextCount
      * @return InterfacePagination
      */
-    public function setDisplayedLinksCount($displayedLinksCount);
+    public function setDisplayedLinksRange($previousCount, $nextCount);
 
     /**
      * @return string
