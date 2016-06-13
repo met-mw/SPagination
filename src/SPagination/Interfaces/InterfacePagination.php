@@ -51,6 +51,12 @@ interface InterfacePagination
     public function setCountOnPageParamName($countOnPageParamName = 'on_page');
 
     /**
+     * @param int $displayedLinksCount
+     * @return InterfacePagination
+     */
+    public function setDisplayedLinksCount($displayedLinksCount);
+
+    /**
      * @return string
      */
     public function get();

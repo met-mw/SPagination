@@ -15,6 +15,7 @@ class Pagination implements InterfacePagination
     protected $countOnPage;
     protected $pageNumberParamName;
     protected $countOnPageParamName;
+    protected $displayedLinksCount = 5;
 
     public function __construct($pageNumberParamName = 'page', $countOnPageParamName = 'on_page')
     {
@@ -94,6 +95,11 @@ class Pagination implements InterfacePagination
         ?><nav><?
             ?><ul><?
                 ?><li<? if ($this->currentPageNumber == 1) { ?> class="disabled"<? } ?>><?
+                    ?><a href="?page=1" aria-label="First"><?
+                        ?><span aria-hidden="true">&laquo;&laquo;</span><?
+                    ?></a><?
+                ?></li><?
+                ?><li<? if ($this->currentPageNumber == 1) { ?> class="disabled"<? } ?>><?
                     ?><a href="#" aria-label="Previous"><?
                         ?><span aria-hidden="true">&laquo;</span><?
                     ?></a><?
@@ -107,6 +113,11 @@ class Pagination implements InterfacePagination
                 ?><li<? if ($this->currentPageNumber == $numberOfPages) { ?> class="disabled"<? } ?>><?
                     ?><a href="#" aria-label="Next"><?
                         ?><span aria-hidden="true">&raquo;</span><?
+                    ?></a><?
+                ?></li><?
+                ?><li<? if ($this->currentPageNumber == $numberOfPages) { ?> class="disabled"<? } ?>><?
+                    ?><a href="?page=<?= $numberOfPages ?>" aria-label="Last"><?
+                        ?><span aria-hidden="true">&raquo;&raquo;</span><?
                     ?></a><?
                 ?></li><?
             ?></ul><?
@@ -130,6 +141,16 @@ class Pagination implements InterfacePagination
     public function setCountOnPageParamName($countOnPageParamName = 'on_page')
     {
         $this->countOnPageParamName = $countOnPageParamName;
+        return $this;
+    }
+
+    /**
+     * @param int $displayedLinksCount
+     * @return InterfacePagination
+     */
+    public function setDisplayedLinksCount($displayedLinksCount)
+    {
+        $this->displayedLinksCount = $displayedLinksCount;
         return $this;
     }
 
