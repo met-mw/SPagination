@@ -115,66 +115,64 @@ class Pagination implements InterfacePagination
 
     public function render()
     {
-        ?><nav><?php
-            ?><ul><?php
-                ?><li<?php if ($this->currentPageNumber == 1) { ?> class="disabled"<?php } ?>><?php
-                    ?><a href="?page=1" aria-label="First"><?php
-                        ?><span aria-hidden="true">&laquo;&laquo;</span><?php
-                    ?></a><?php
-                ?></li><?php
-                ?><li<?php if ($this->currentPageNumber == 1) { ?> class="disabled"<?php } ?>><?php
-                    ?><a href="#" aria-label="Previous"><?php
-                        ?><span aria-hidden="true">&laquo;</span><?php
-                    ?></a><?php
-                ?></li><?php
+        ?><ul><?php
+            ?><li<?php if ($this->currentPageNumber == 1) { ?> class="disabled"<?php } ?>><?php
+                ?><a href="?page=1&amp;on_page=<?php echo $this->countOnPage; ?>" aria-label="First"><?php
+                    ?><span aria-hidden="true">&laquo;&laquo;</span><?php
+                ?></a><?php
+            ?></li><?php
+            ?><li<?php if ($this->currentPageNumber == 1) { ?> class="disabled"<?php } ?>><?php
+                ?><a href="?page=<?php echo ($this->currentPageNumber == 1 ? 1 : $this->currentPageNumber - 1); ?>&amp;on_page=<?php echo $this->countOnPage; ?>" aria-label="Previous"><?php
+                    ?><span aria-hidden="true">&laquo;</span><?php
+                ?></a><?php
+            ?></li><?php
 
-                $numberOfPages = $this->getNumberOfPages();
-                $previousAndCurrentDiff = $this->currentPageNumber - $this->displayedPreviousCount;
-                $nextAndCurrentDiff = $this->currentPageNumber + $this->displayedNextCount;
+            $numberOfPages = $this->getNumberOfPages();
+            $previousAndCurrentDiff = $this->currentPageNumber - $this->displayedPreviousCount;
+            $nextAndCurrentDiff = $this->currentPageNumber + $this->displayedNextCount;
 
-                $needPreviousEllipsis = $previousAndCurrentDiff >= 2;
-                $needNextEllipsis = $nextAndCurrentDiff <= $numberOfPages - 1;
+            $needPreviousEllipsis = $previousAndCurrentDiff >= 2;
+            $needNextEllipsis = $nextAndCurrentDiff <= $numberOfPages - 1;
 
-                if ($needPreviousEllipsis) {
-                    ?><li>...</li><?php
-                }
+            if ($needPreviousEllipsis) {
+                ?><li>...</li><?php
+            }
 
-                for ($i = 1; $i <= $numberOfPages; $i++) {
-                    if ($i < $this->currentPageNumber) {
-                        if ($i >= $previousAndCurrentDiff) {
-                            ?><li><?php
-                                ?><a href="?page=<?php echo $i; ?>&on_page=<?php echo $this->countOnPage; ?>"><?php echo $i; ?></a><?php
-                            ?></li><?php
-                        }
-                    } elseif ($i > $this->currentPageNumber) {
-                        if ($i <= $nextAndCurrentDiff) {
-                            ?><li><?php
-                                ?><a href="?page=<?php echo $i; ?>&on_page=<?php echo $this->countOnPage; ?>"><?php echo $i; ?></a><?php
-                            ?></li><?php
-                        }
-                    } else {
-                        ?><li class="active"><?php
-                            ?><a href="?page=<?php echo $i; ?>&on_page=<?php echo $this->countOnPage; ?>"><?php echo $i; ?></a><?php
+            for ($i = 1; $i <= $numberOfPages; $i++) {
+                if ($i < $this->currentPageNumber) {
+                    if ($i >= $previousAndCurrentDiff) {
+                        ?><li><?php
+                            ?><a href="?page=<?php echo $i; ?>&amp;on_page=<?php echo $this->countOnPage; ?>"><?php echo $i; ?></a><?php
                         ?></li><?php
                     }
+                } elseif ($i > $this->currentPageNumber) {
+                    if ($i <= $nextAndCurrentDiff) {
+                        ?><li><?php
+                            ?><a href="?page=<?php echo $i; ?>&amp;on_page=<?php echo $this->countOnPage; ?>"><?php echo $i; ?></a><?php
+                        ?></li><?php
+                    }
+                } else {
+                    ?><li class="active"><?php
+                        ?><a href="?page=<?php echo $i; ?>&amp;on_page=<?php echo $this->countOnPage; ?>"><?php echo $i; ?></a><?php
+                    ?></li><?php
                 }
+            }
 
-                if ($needNextEllipsis) {
-                    ?><li>...</li><?php
-                }
+            if ($needNextEllipsis) {
+                ?><li>...</li><?php
+            }
 
-                ?><li<?php if ($this->currentPageNumber == $numberOfPages) { ?> class="disabled"<?php } ?>><?php
-                    ?><a href="#" aria-label="Next"><?php
-                        ?><span aria-hidden="true">&raquo;</span><?php
-                    ?></a><?php
-                ?></li><?php
-                ?><li<?php if ($this->currentPageNumber == $numberOfPages) { ?> class="disabled"<?php } ?>><?php
-                    ?><a href="?page=<?php echo $numberOfPages; ?>" aria-label="Last"><?php
-                        ?><span aria-hidden="true">&raquo;&raquo;</span><?php
-                    ?></a><?php
-                ?></li><?php
-            ?></ul><?php
-        ?></nav><?php
+            ?><li<?php if ($this->currentPageNumber == $numberOfPages) { ?> class="disabled"<?php } ?>><?php
+                ?><a href="?page=<?php echo ($this->currentPageNumber == $numberOfPages ? $numberOfPages : $this->currentPageNumber + 1); ?>&amp;on_page=<?php echo $this->countOnPage; ?>" aria-label="Next"><?php
+                    ?><span aria-hidden="true">&raquo;</span><?php
+                ?></a><?php
+            ?></li><?php
+            ?><li<?php if ($this->currentPageNumber == $numberOfPages) { ?> class="disabled"<?php } ?>><?php
+                ?><a href="?page=<?php echo $numberOfPages; ?>&amp;on_page=<?php echo $this->countOnPage; ?>" aria-label="Last"><?php
+                    ?><span aria-hidden="true">&raquo;&raquo;</span><?php
+                ?></a><?php
+            ?></li><?php
+        ?></ul><?php
     }
 
     /**
