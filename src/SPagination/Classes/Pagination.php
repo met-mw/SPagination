@@ -7,7 +7,6 @@ use SPagination\Interfaces\InterfacePagination;
 
 class Pagination implements InterfacePagination
 {
-
     /** @var int */
     protected $count;
     /** @var int */
@@ -224,5 +223,4 @@ class Pagination implements InterfacePagination
         $this->displayedNextCount = $nextCount;
         return $this;
     }
-
 }
