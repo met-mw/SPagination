@@ -5,12 +5,14 @@
 [![Total Downloads](https://poser.pugx.org/met_mw/spagination/downloads)](https://packagist.org/packages/met_mw/spagination)
 [![License](https://poser.pugx.org/met_mw/spagination/license)](https://packagist.org/packages/met_mw/spagination)
 # SPagination
-Простой механизм постраничной навигации
+Простой независимый механизм постраничной навигации
 
 ## Установка
 composer require met_mw/spagination
 
 ## Пример использования
+
+#### Отрисовка
 
 ```PHP
 $Pagination = new Pagination();
@@ -18,6 +20,16 @@ $Pagination->setCount(100)
     ->setCountOnPage(10)
     ->setCurrentPageNumber(5)
     ->render();
+```
+
+#### Получить в виде строки
+
+```PHP
+$Pagination = new Pagination();
+$paginationHTML = $Pagination->setCount(100)
+    ->setCountOnPage(10)
+    ->setCurrentPageNumber(5)
+    ->get();
 ```
 
 ## Лицензия
