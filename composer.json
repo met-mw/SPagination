@@ -1,7 +1,7 @@
 {
     "name": "met_mw/spagination",
     "type": "library",
-    "keywords": ["universal", "pagination"],
+    "keywords": ["universal", "pagination", "independent"],
     "license": "MIT",
     "authors": [
         {

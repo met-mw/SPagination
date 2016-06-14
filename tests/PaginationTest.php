@@ -67,6 +67,7 @@ class PaginationTest extends PHPUnit_Framework_TestCase
             $this->fail('Set count exception is not thrown.');
         }
 
+        $throw = false;
         try {
             $Pagination->setCountOnPage('any_string');
         } catch(InvalidArgumentException $e) {
@@ -76,6 +77,7 @@ class PaginationTest extends PHPUnit_Framework_TestCase
             $this->fail('Set count on page exception is not thrown.');
         }
 
+        $throw = false;
         try {
             $Pagination->setCurrentPageNumber('any_string');
         } catch(InvalidArgumentException $e) {
@@ -85,6 +87,7 @@ class PaginationTest extends PHPUnit_Framework_TestCase
             $this->fail('Set current page number exception is not thrown.');
         }
 
+        $throw = false;
         try {
             $Pagination->setDisplayedLinksRange('any_string', 1);
         } catch(InvalidArgumentException $e) {
@@ -94,6 +97,7 @@ class PaginationTest extends PHPUnit_Framework_TestCase
             $this->fail('Set previous displayed range exception is not thrown.');
         }
 
+        $throw = false;
         try {
             $Pagination->setDisplayedLinksRange(1, 'any_string');
         } catch(InvalidArgumentException $e) {
@@ -103,6 +107,7 @@ class PaginationTest extends PHPUnit_Framework_TestCase
             $this->fail('Set next displayed range exception is not thrown.');
         }
 
+        $throw = false;
         try {
             $Pagination->setCountOnPageParamName(1);
         } catch(InvalidArgumentException $e) {
@@ -112,6 +117,7 @@ class PaginationTest extends PHPUnit_Framework_TestCase
             $this->fail('Set count on page param name exception is not thrown.');
         }
 
+        $throw = false;
         try {
             $Pagination->setPageNumberParamName(1);
         } catch(InvalidArgumentException $e) {
