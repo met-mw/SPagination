@@ -45,6 +45,75 @@ class PaginationTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($Pagination, $Pagination->setDisplayedLinksRange(1, 1));
     }
 
+    public function testExceptions()
+    {
+        $Pagination = new Pagination();
+
+        $throw = false;
+        try {
+            $Pagination->setCount('any_string');
+        } catch(InvalidArgumentException $e) {
+            $throw = true;
+        }
+        if (!$throw) {
+            $this->fail('Set count exception is not thrown.');
+        }
+
+        try {
+            $Pagination->setCountOnPage('any_string');
+        } catch(InvalidArgumentException $e) {
+            $throw = true;
+        }
+        if (!$throw) {
+            $this->fail('Set count on page exception is not thrown.');
+        }
+
+        try {
+            $Pagination->setCurrentPageNumber('any_string');
+        } catch(InvalidArgumentException $e) {
+            $throw = true;
+        }
+        if (!$throw) {
+            $this->fail('Set current page number exception is not thrown.');
+        }
+
+        try {
+            $Pagination->setDisplayedLinksRange('any_string', 1);
+        } catch(InvalidArgumentException $e) {
+            $throw = true;
+        }
+        if (!$throw) {
+            $this->fail('Set previous displayed range exception is not thrown.');
+        }
+
+        try {
+            $Pagination->setDisplayedLinksRange(1, 'any_string');
+        } catch(InvalidArgumentException $e) {
+            $throw = true;
+        }
+        if (!$throw) {
+            $this->fail('Set next displayed range exception is not thrown.');
+        }
+
+        try {
+            $Pagination->setCountOnPageParamName(1);
+        } catch(InvalidArgumentException $e) {
+            $throw = true;
+        }
+        if (!$throw) {
+            $this->fail('Set count on page param name exception is not thrown.');
+        }
+
+        try {
+            $Pagination->setPageNumberParamName(1);
+        } catch(InvalidArgumentException $e) {
+            $throw = true;
+        }
+        if (!$throw) {
+            $this->fail('Set page number param name exception is not thrown.');
+        }
+    }
+
     public function testRender()
     {
         $Pagination = new Pagination();
