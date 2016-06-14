@@ -34,6 +34,14 @@ class PaginationTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(4, $Pagination->getNumberOfPages());
     }
 
+    public function testLimit()
+    {
+        $Pagination = new Pagination();
+        $Pagination->setCount(10)
+            ->setCountOnPage(2);
+        $this->assertEquals(2, $Pagination->getLimit());
+    }
+
     public function testSettings()
     {
         $Pagination = new Pagination();
