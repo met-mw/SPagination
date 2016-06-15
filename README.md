@@ -5,14 +5,14 @@
 [![Total Downloads](https://poser.pugx.org/met_mw/spagination/downloads)](https://packagist.org/packages/met_mw/spagination)
 [![License](https://poser.pugx.org/met_mw/spagination/license)](https://packagist.org/packages/met_mw/spagination)
 # SPagination
-Простой независимый механизм постраничной навигации
+Simple independent library to create pagination in web-applications.
 
-## Установка
+## Install
 composer require met_mw/spagination
 
-## Пример использования
+## Examples
 
-#### Отрисовка
+#### Render
 
 ```PHP
 $Pagination = new Pagination();
@@ -22,7 +22,7 @@ $Pagination->setCount(100)
     ->render();
 ```
 
-#### Получить в виде строки
+#### Get as string
 
 ```PHP
 $Pagination = new Pagination();
@@ -32,5 +32,5 @@ $paginationHTML = $Pagination->setCount(100)
     ->get();
 ```
 
-## Лицензия
-SPagination пакет с открытым исходным кодом, под лицензией **[MIT](https://opensource.org/licenses/MIT)**
+## License
+The met-mw/SPagination package is open-sourced software licensed under the **[MIT license](https://opensource.org/licenses/MIT)**
