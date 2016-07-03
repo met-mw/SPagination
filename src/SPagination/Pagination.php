@@ -134,7 +134,7 @@ class Pagination implements InterfacePagination
             $needNextEllipsis = $nextAndCurrentDiff <= $numberOfPages - 1;
 
             if ($needPreviousEllipsis) {
-                ?><li>...</li><?php
+                ?><li><span>...</span></li><?php
             }
 
             for ($i = 1; $i <= $numberOfPages; $i++) {
