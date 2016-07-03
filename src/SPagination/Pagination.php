@@ -1,9 +1,8 @@
 <?php
-namespace SPagination\Classes;
+namespace SPagination;
 
 
 use InvalidArgumentException;
-use SPagination\Interfaces\InterfacePagination;
 
 class Pagination implements InterfacePagination
 
@@ -60,7 +59,7 @@ class Pagination implements InterfacePagination
 
     /**
      * @param int $count
-     * @return InterfacePagination
+     * @return $this
      */
     public function setCount($count)
     {
@@ -74,7 +73,7 @@ class Pagination implements InterfacePagination
 
     /**
      * @param int $pageNumber
-     * @return InterfacePagination
+     * @return $this
      */
     public function setCurrentPageNumber($pageNumber = 1)
     {
@@ -88,7 +87,7 @@ class Pagination implements InterfacePagination
 
     /**
      * @param int $countOnPage
-     * @return InterfacePagination
+     * @return $this
      */
     public function setCountOnPage($countOnPage)
     {
@@ -177,7 +176,7 @@ class Pagination implements InterfacePagination
 
     /**
      * @param string $pageNumberParamName
-     * @return InterfacePagination
+     * @return $this
      */
     public function setPageNumberParamName($pageNumberParamName = 'page')
     {
@@ -191,7 +190,7 @@ class Pagination implements InterfacePagination
 
     /**
      * @param string $countOnPageParamName
-     * @return InterfacePagination
+     * @return $this
      */
     public function setCountOnPageParamName($countOnPageParamName = 'on_page')
     {
@@ -206,7 +205,7 @@ class Pagination implements InterfacePagination
     /**
      * @param int $previousCount
      * @param int $nextCount
-     * @return InterfacePagination
+     * @return $this
      */
     public function setDisplayedLinksRange($previousCount, $nextCount)
     {

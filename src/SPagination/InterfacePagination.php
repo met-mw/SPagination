@@ -1,5 +1,5 @@
 <?php
-namespace SPagination\Interfaces;
+namespace SPagination;
 
 
 interface InterfacePagination
@@ -22,38 +22,38 @@ interface InterfacePagination
 
     /**
      * @param int $count
-     * @return InterfacePagination
+     * @return $this
      */
     public function setCount($count);
 
     /**
      * @param int $pageNumber
-     * @return InterfacePagination
+     * @return $this
      */
     public function setCurrentPageNumber($pageNumber);
 
     /**
      * @param int $countOnPage
-     * @return InterfacePagination
+     * @return $this
      */
     public function setCountOnPage($countOnPage);
 
     /**
      * @param string $pageNumberParamName
-     * @return InterfacePagination
+     * @return $this
      */
     public function setPageNumberParamName($pageNumberParamName = 'page');
 
     /**
      * @param string $countOnPageParamName
-     * @return InterfacePagination
+     * @return $this
      */
     public function setCountOnPageParamName($countOnPageParamName = 'on_page');
 
     /**
      * @param int $previousCount
      * @param int $nextCount
-     * @return InterfacePagination
+     * @return $this
      */
     public function setDisplayedLinksRange($previousCount, $nextCount);
 
