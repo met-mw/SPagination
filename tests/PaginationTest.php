@@ -1,5 +1,5 @@
 <?php
-use SPagination\Classes\Pagination;
+use SPagination\Pagination;
 
 class PaginationTest extends PHPUnit_Framework_TestCase
 {
