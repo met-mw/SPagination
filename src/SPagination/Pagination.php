@@ -158,7 +158,7 @@ class Pagination implements InterfacePagination
             }
 
             if ($needNextEllipsis) {
-                ?><li>...</li><?php
+                ?><li><span>...</span></li><?php
             }
 
             ?><li<?php if ($this->currentPageNumber == $numberOfPages) { ?> class="disabled"<?php } ?>><?php
