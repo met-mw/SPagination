@@ -114,9 +114,9 @@ class Pagination implements InterfacePagination
 
     protected function removeUrlQueryKey($urlQuery, $key) {
         parse_str($urlQuery, $vars);
-        $url = strtok($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], '?') . http_build_query(array_diff_key($vars,array($key=>"")));
+        $newUrlQuery = http_build_query(array_diff_key($vars,array($key=>"")));
 
-        return $url;
+        return $newUrlQuery;
     }
 
     public function render()
