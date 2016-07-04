@@ -128,7 +128,7 @@ class Pagination implements InterfacePagination
             $urlQuery = $this->removeUrlQueryKey($urlQuery, $this->countOnPageParamName);
         }
 
-        $urlQuery = empty($urlQuery) ? '?' : "{$urlQuery}&";
+        $urlQuery = empty($urlQuery) ? '?' : "?{$urlQuery}&";
         ?><ul class="pagination"><?php
             ?><li<?php if ($this->currentPageNumber == 1) { ?> class="disabled"<?php } ?>><?php
                 ?><a href="<?= $urlQuery ?><?php echo $this->pageNumberParamName; ?>=1&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>" aria-label="First"><?php
