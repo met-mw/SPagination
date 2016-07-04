@@ -112,17 +112,31 @@ class Pagination implements InterfacePagination
         return $content;
     }
 
+    protected function removeUrlQueryKey($urlQuery, $key) {
+        parse_str($urlQuery, $vars);
+        $url = strtok($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], '?') . http_build_query(array_diff_key($vars,array($key=>"")));
+
+        return $url;
+    }
+
     public function render()
     {
-        $url = isset($_SERVER["QUERY_STRING"]) ? $_SERVER["QUERY_STRING"] . '&' : '?';
+        $urlQuery = '';
+        if (isset($_SERVER["QUERY_STRING"])) {
+            $urlQuery = $_SERVER["QUERY_STRING"];
+            $urlQuery = $this->removeUrlQueryKey($urlQuery, $this->pageNumberParamName);
+            $urlQuery = $this->removeUrlQueryKey($urlQuery, $this->countOnPageParamName);
+        }
+
+        $urlQuery = empty($urlQuery) ? '?' : "{$urlQuery}&";
         ?><ul class="pagination"><?php
             ?><li<?php if ($this->currentPageNumber == 1) { ?> class="disabled"<?php } ?>><?php
-                ?><a href="<?= $url ?><?php echo $this->pageNumberParamName; ?>=1&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>" aria-label="First"><?php
+                ?><a href="<?= $urlQuery ?><?php echo $this->pageNumberParamName; ?>=1&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>" aria-label="First"><?php
                     ?><span aria-hidden="true">&laquo;&laquo;</span><?php
                 ?></a><?php
             ?></li><?php
             ?><li<?php if ($this->currentPageNumber == 1) { ?> class="disabled"<?php } ?>><?php
-                ?><a href="<?= $url ?>?<?php echo $this->pageNumberParamName; ?>=<?php echo ($this->currentPageNumber == 1 ? 1 : $this->currentPageNumber - 1); ?>&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>" aria-label="Previous"><?php
+                ?><a href="<?= $urlQuery ?>?<?php echo $this->pageNumberParamName; ?>=<?php echo ($this->currentPageNumber == 1 ? 1 : $this->currentPageNumber - 1); ?>&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>" aria-label="Previous"><?php
                     ?><span aria-hidden="true">&laquo;</span><?php
                 ?></a><?php
             ?></li><?php
@@ -142,18 +156,18 @@ class Pagination implements InterfacePagination
                 if ($i < $this->currentPageNumber) {
                     if ($i >= $previousAndCurrentDiff) {
                         ?><li><?php
-                            ?><a href="<?= $url ?><?php echo $this->pageNumberParamName; ?>=<?php echo $i; ?>&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>"><?php echo $i; ?></a><?php
+                            ?><a href="<?= $urlQuery ?><?php echo $this->pageNumberParamName; ?>=<?php echo $i; ?>&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>"><?php echo $i; ?></a><?php
                         ?></li><?php
                     }
                 } elseif ($i > $this->currentPageNumber) {
                     if ($i <= $nextAndCurrentDiff) {
                         ?><li><?php
-                            ?><a href="<?= $url ?><?php echo $this->pageNumberParamName; ?>=<?php echo $i; ?>&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>"><?php echo $i; ?></a><?php
+                            ?><a href="<?= $urlQuery ?><?php echo $this->pageNumberParamName; ?>=<?php echo $i; ?>&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>"><?php echo $i; ?></a><?php
                         ?></li><?php
                     }
                 } else {
                     ?><li class="active"><?php
-                        ?><a href="<?= $url ?><?php echo $this->pageNumberParamName; ?>=<?php echo $i; ?>&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>"><?php echo $i; ?></a><?php
+                        ?><a href="<?= $urlQuery ?><?php echo $this->pageNumberParamName; ?>=<?php echo $i; ?>&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>"><?php echo $i; ?></a><?php
                     ?></li><?php
                 }
             }
@@ -163,12 +177,12 @@ class Pagination implements InterfacePagination
             }
 
             ?><li<?php if ($this->currentPageNumber == $numberOfPages) { ?> class="disabled"<?php } ?>><?php
-                ?><a href="<?= $url ?><?php echo $this->pageNumberParamName; ?>=<?php echo ($this->currentPageNumber == $numberOfPages ? $numberOfPages : $this->currentPageNumber + 1); ?>&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>" aria-label="Next"><?php
+                ?><a href="<?= $urlQuery ?><?php echo $this->pageNumberParamName; ?>=<?php echo ($this->currentPageNumber == $numberOfPages ? $numberOfPages : $this->currentPageNumber + 1); ?>&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>" aria-label="Next"><?php
                     ?><span aria-hidden="true">&raquo;</span><?php
                 ?></a><?php
             ?></li><?php
             ?><li<?php if ($this->currentPageNumber == $numberOfPages) { ?> class="disabled"<?php } ?>><?php
-                ?><a href="<?= $url ?><?php echo $this->pageNumberParamName; ?>=<?php echo $numberOfPages; ?>&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>" aria-label="Last"><?php
+                ?><a href="<?= $urlQuery ?><?php echo $this->pageNumberParamName; ?>=<?php echo $numberOfPages; ?>&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>" aria-label="Last"><?php
                     ?><span aria-hidden="true">&raquo;&raquo;</span><?php
                 ?></a><?php
             ?></li><?php
