@@ -8,7 +8,7 @@ class Pagination implements InterfacePagination
 
 {
     /** @var int */
-    protected $count;
+    protected $count = 0;
     /** @var int */
     protected $currentPageNumber = 1;
     /** @var int */
@@ -31,6 +31,14 @@ class Pagination implements InterfacePagination
         $this->setDisplayedLinksRange($displayedPreviousCount, $displayedNextCount)
             ->setPageNumberParamName($pageNumberParamName)
             ->setCountOnPageParamName($countOnPageParamName);
+    }
+
+    /**
+     * @return int
+     */
+    public function getCount()
+    {
+        return $this->count;
     }
 
     /**

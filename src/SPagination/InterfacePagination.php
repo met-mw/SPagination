@@ -8,6 +8,11 @@ interface InterfacePagination
     /**
      * @return int
      */
+    public function getCount();
+
+    /**
+     * @return int
+     */
     public function getLimit();
 
     /**
