@@ -12,7 +12,7 @@ class Pagination implements InterfacePagination
     /** @var int */
     protected $currentPageNumber = 1;
     /** @var int */
-    protected $countOnPage = 10;
+    protected $countOnPage = 0;
     protected $pageNumberParamName = 'page';
     protected $countOnPageParamName = 'on_page';
 
@@ -54,7 +54,7 @@ class Pagination implements InterfacePagination
      */
     public function getNumberOfPages()
     {
-        return (int)ceil($this->count / $this->countOnPage);
+        return $this->countOnPage != 0 ? (int)ceil($this->count / $this->countOnPage) : 1;
     }
 
     /**
