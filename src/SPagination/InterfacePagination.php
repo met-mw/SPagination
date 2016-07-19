@@ -48,7 +48,7 @@ interface InterfacePagination
      * @param string $countOnPageParamName
      * @return $this
      */
-    public function setCountOnPageParamName($countOnPageParamName = 'on_page');
+    public function setCountOnPageParamName($countOnPageParamName = 'on-page');
 
     /**
      * @param int $previousCount

@@ -14,7 +14,7 @@ class Pagination implements InterfacePagination
     /** @var int */
     protected $countOnPage = 0;
     protected $pageNumberParamName = 'page';
-    protected $countOnPageParamName = 'on_page';
+    protected $countOnPageParamName = 'on-page';
 
     protected $displayedPreviousCount = 5;
     protected $displayedNextCount = 5;
@@ -26,7 +26,7 @@ class Pagination implements InterfacePagination
      * @param string $pageNumberParamName
      * @param string $countOnPageParamName
      */
-    public function __construct($displayedPreviousCount = 5, $displayedNextCount = 5, $pageNumberParamName = 'page', $countOnPageParamName = 'on_page')
+    public function __construct($displayedPreviousCount = 5, $displayedNextCount = 5, $pageNumberParamName = 'page', $countOnPageParamName = 'on-page')
     {
         $this->setDisplayedLinksRange($displayedPreviousCount, $displayedNextCount)
             ->setPageNumberParamName($pageNumberParamName)
@@ -136,7 +136,7 @@ class Pagination implements InterfacePagination
                 ?></a><?php
             ?></li><?php
             ?><li<?php if ($this->currentPageNumber == 1) { ?> class="disabled"<?php } ?>><?php
-                ?><a href="<?= $urlQuery ?>?<?php echo $this->pageNumberParamName; ?>=<?php echo ($this->currentPageNumber == 1 ? 1 : $this->currentPageNumber - 1); ?>&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>" aria-label="Previous"><?php
+                ?><a href="<?= $urlQuery ?><?php echo $this->pageNumberParamName; ?>=<?php echo ($this->currentPageNumber == 1 ? 1 : $this->currentPageNumber - 1); ?>&amp;<?php echo $this->countOnPageParamName; ?>=<?php echo $this->countOnPage; ?>" aria-label="Previous"><?php
                     ?><span aria-hidden="true">&laquo;</span><?php
                 ?></a><?php
             ?></li><?php
@@ -207,7 +207,7 @@ class Pagination implements InterfacePagination
      * @param string $countOnPageParamName
      * @return $this
      */
-    public function setCountOnPageParamName($countOnPageParamName = 'on_page')
+    public function setCountOnPageParamName($countOnPageParamName = 'on-page')
     {
         if (!is_string($countOnPageParamName)) {
             throw new InvalidArgumentException('Имя параметра количества элементов на странице должно быть строкой.');
